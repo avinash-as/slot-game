@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Slot Machine - WebGL Build</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🎰 Lucky Slots</h1>
+      <p class="subtitle">Match 3 symbols to win. 3 Scatters trigger 10 Free Spins (2x).</p>
+    </header>
+
+    <main>
+      <canvas id="game" width="900" height="520"></canvas>
+
+      <div class="hud">
+        <div class="stat"><span>Balance</span><strong id="balance">1000</strong></div>
+        <div class="stat"><span>Bet</span><strong id="bet">10</strong></div>
+        <div class="stat"><span>Win</span><strong id="win">0</strong></div>
+        <div class="stat"><span>Free Spins</span><strong id="freespins">0</strong></div>
+      </div>
+
+      <div class="controls">
+        <button id="betDown">Bet -</button>
+        <button id="betUp">Bet +</button>
+        <button id="spin" class="primary">SPIN</button>
+        <button id="mute">🔊</button>
+      </div>
+
+      <div id="message" class="message">Place your bet and spin!</div>
+    </main>
+
+    <footer>
+      <small>WebGL-style build · HTML5 Canvas · RNG powered</small>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
