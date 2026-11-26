@@ -1,41 +1,54 @@
-# Lucky Slots - Unity Slot Game
+# Lucky Slots
 
-A playable slot machine game built with Unity (C#) plus an HTML5 WebGL build.
+A simple slot machine game I built with Unity and C#. You spin 5 reels, match symbols on the middle line, and try to hit the jackpot. Wilds substitute for other symbols, and 3 scatters give you 10 free spins at 2x.
 
-## Game Overview
-- 5 reels x 3 rows slot machine.
-- Win when all slots show the same symbol (Jackpot) or 3+ matching symbols on the middle payline.
-- Symbols: Cherry, Lemon, Orange, Plum, Bell, Bar, Seven, Wild (⭐ substitutes), Scatter (💎).
-- 3+ Scatters trigger 10 Free Spins with a 2x multiplier.
-- RNG-based outcomes using weighted symbol probabilities.
+## Play it
 
-## Project Structure
+Live build: https://avinash-as.github.io/slot-game/
+
+To run locally, open `Build/WebGL/index.html` in a browser, or serve the folder:
+
+```
+cd Build/WebGL
+python -m http.server 8000
+```
+
+Then visit http://localhost:8000.
+
+## How the game works
+
+- 5 reels, 3 rows. The middle row is the payline.
+- Match 3 or more of the same symbol on the payline to win.
+- All 15 cells the same symbol = jackpot.
+- 3 or more scatters (💎) trigger 10 free spins with a 2x multiplier.
+- Wild (⭐) counts as any symbol.
+
+## Project layout
+
 ```
 Assets/
-  Scripts/   (Core, Symbols, UI, Audio, Bonus, Utilities)
+  Scripts/        C# scripts (core, symbols, ui, audio, bonus, utils)
+  Scenes/         Main scene
   Prefabs/
   Animations/
   UI/
   Sounds/
-  Scenes/
-Build/WebGL/  (playable web build)
+Build/WebGL/      Playable web build
+README.md
 ```
 
-## Instructions to Run WebGL Build
-1. Open `Build/WebGL/index.html` in any modern browser, or
-2. Serve the folder: `python -m http.server 8000` inside `Build/WebGL` then visit http://localhost:8000
-3. Click SPIN. Adjust bet with Bet +/-.
+## Running the Unity project
 
-## Bonus Features
-- Wild symbol substitutes for any symbol.
-- Scatter triggers 10 free spins at 2x multiplier.
-- Jackpot when all 15 visible cells match.
+Open the folder in Unity 2022.3 LTS or newer. Assign the serialized references on the SlotMachine object (reels, symbol prefab, symbol pool, UI elements), then build for WebGL into `Build/WebGL`.
 
-## Thought Process / Approach
-- Separated concerns: RNGService (testable), PayTable (pure logic), Reel (animation), SlotMachine (orchestration), AudioManager, BonusFeature.
-- Reels use a 3-phase animation (accelerate/cruise/decelerate) with predetermined RNG targets for fairness.
-- Data-driven symbols via ScriptableObjects for easy balancing.
-- Incremental git commits.
+## Notes on my approach
 
-## Unity Notes
-Open the project in Unity 2022 LTS+. Assign symbol pool, prefabs and UI references in the inspector on the SlotMachine GameObject.
+I kept the game logic separate from the animation. RNGService handles randomness, PayTable handles wins, Reel handles the spin animation, and SlotMachine ties it together. Symbols are ScriptableObjects so payouts and weights can be tweaked without code changes. Reels spin in three phases (speed up, cruise, slow down) and always land on a predetermined outcome so the RNG stays fair.
+
+## Bonus features
+
+- Wild symbol
+- Scatter-triggered free spins with multiplier
+- Jackpot for a full screen of matching symbols
+
+Feel free to reach out if you have questions.
